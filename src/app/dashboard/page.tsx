@@ -28,12 +28,12 @@ export default function Dashboard() {
   const handleModerate = () => console.log("Opening moderation panel")
 
   return (
-    <div className="">
+    <div className="h-screen">
       {/* Sidebar */}
      
 
       {/* Main content */}
-      <main className="flex-1 p-4 overflow-auto">
+      <main className="flex-1 p-4 overflow-auto  ">
         {/* Top bar */}
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center space-x-2">
