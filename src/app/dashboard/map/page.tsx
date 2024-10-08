@@ -41,12 +41,12 @@ export default function MapPage() {
   const handleLanguageChange = (lang: string) => setSelectedLanguage(lang)
 
   return (
-    <div className="flex h-screen bg-gray-100 dark:bg-gray-900">
+    <div className=" h-screen bg-gray-100 dark:bg-gray-900">
       {/* Sidebar */}
      
 
       {/* Main content */}
-      <main className="flex-1 p-4 overflow-hidden">
+      <main className="flex-1  overflow-hidden">
         {/* Top bar */}
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center space-x-2">

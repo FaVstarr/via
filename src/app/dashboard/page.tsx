@@ -33,7 +33,7 @@ export default function Dashboard() {
      
 
       {/* Main content */}
-      <main className="flex-1 p-4 overflow-auto  ">
+      <main className="flex-1 ">
         {/* Top bar */}
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center space-x-2">
@@ -65,7 +65,7 @@ export default function Dashboard() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Avatar>
-                  <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
+                  <AvatarImage src="https://github.com/shadcn.png" alt="User" />
                   <AvatarFallback>U</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
