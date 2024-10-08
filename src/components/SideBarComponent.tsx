@@ -1,35 +1,39 @@
 import { BookOpen, MapPin, Navigation, Search, Users } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
-import { Button } from './ui/button'
+
+
 
 const SideBarComponent = () => {
+
+    
   return (
     <aside className="w-64 bg-white dark:bg-gray-800 p-4 hidden md:block">
-    <div className="flex items-center mb-6">
+    <Link href="/dashboard" className="flex items-center mb-6">
       <MapPin className="h-6 w-6 text-primary" />
       <span className="ml-2 text-xl font-bold">VIA</span>
-    </div>
+    </Link>
     <nav className="space-y-2">
-      <Button variant="ghost" className="w-full justify-start">
+      <Link variant="ghost"  href="/dashboard/map" className="w-full justify-start items-center flex">
         <MapPin className="mr-2 h-4 w-4" />
         Map
-      </Button>
-      <Button variant="ghost" className="w-full justify-start">
+      </Link>
+      <Link variant="ghost" href="/dashboard/search" className="w-full justify-start items-center flex">
         <Search className="mr-2 h-4 w-4" />
         Search
-      </Button>
-      <Button variant="ghost" className="w-full justify-start">
+      </Link>
+      <Link variant="ghost" href="/dashboard/directions" className="w-full justify-start items-center flex">
         <Navigation className="mr-2 h-4 w-4" />
         Directions
-      </Button>
-      <Button variant="ghost" className="w-full justify-start">
+      </Link>
+      <Link variant="ghost" href="/dashboard/community" className="w-full justify-start items-center flex">
         <Users className="mr-2 h-4 w-4" />
         Community
-      </Button>
-      <Button variant="ghost" className="w-full justify-start">
+      </Link>
+      <Link variant="ghost" href="/dashboard/learn" className="w-full justify-start items-center flex">
         <BookOpen className="mr-2 h-4 w-4" />
         Learn
-      </Button>
+      </Link>
     </nav>
   </aside>
   )
