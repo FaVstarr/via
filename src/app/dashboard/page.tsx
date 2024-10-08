@@ -88,7 +88,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent>
               {/* Placeholder for the actual map component */}
-              <div className="bg-gray-200 dark:bg-gray-700 h-96 flex items-center justify-center">
+              <div className="bg-gray-200 dark:bg-gray-700 h-96  flex items-center justify-center">
                 <InteractiveMapComponent/>
               </div>
             </CardContent>
