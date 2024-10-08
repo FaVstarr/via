@@ -1,29 +1,21 @@
+
+import HeaderComponent from "@/components/HeaderComponent"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { MapPin, Navigation, Users, BookOpen, Globe, Search, PenTool, Shield } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import LandingImage from '../public/landing.png'
+
+import ButtonComponent from "@/components/ButtonComponent"
+
+
 
 export default function Component() {
+
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="px-4 lg:px-6 h-14 flex items-center">
-        <Link className="flex items-center justify-center" href="#">
-          <MapPin className="h-6 w-6" />
-          <span className="sr-only">Indigenous Directions</span>
-        </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#features">
-            Features
-          </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#about">
-            About
-          </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#contact">
-            Contact
-          </Link>
-        </nav>
-      </header>
+      <HeaderComponent/>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
           <div className="container px-4 md:px-6">
@@ -37,8 +29,8 @@ export default function Component() {
                   community-driven navigation app.
                 </p>
               </div>
-              <div className="space-x-4">
-                <Button>Get Started</Button>
+              <div className="space-x-4 flex">
+                <ButtonComponent label='Get started'/>
                 <Button variant="outline">Learn More</Button>
               </div>
             </div>
@@ -111,15 +103,15 @@ export default function Component() {
               <Image
                 alt="Indigenous landscape"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
-                height="310"
-                src="/placeholder.svg"
-                width="550"
+                height={310}
+                src={LandingImage}
+                width={550}
               />
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Mission</h2>
                   <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                    Indigenous Directions is dedicated to preserving and sharing indigenous knowledge through technology.
+                    VIA is dedicated to preserving and sharing indigenous knowledge through technology.
                     We aim to:
                   </p>
                 </div>
@@ -177,7 +169,7 @@ export default function Component() {
         </section>
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-gray-500 dark:text-gray-400">© 2024 Indigenous Directions. All rights reserved.</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">© 2024 VIA. All rights reserved.</p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link className="text-xs hover:underline underline-offset-4" href="#">
             Terms of Service
