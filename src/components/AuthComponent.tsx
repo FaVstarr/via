@@ -78,11 +78,11 @@ export default function AuthPage({pathname}: AuthComponentProps) {
           <div className="text-sm text-muted-foreground">
             <span className="mr-1">{pathname === '/sign-up' ? "Already have an account?" : "Don't have an account?"}</span>
             <Button
-              className="underline text-primary"
+              className="hover:underline  text-primary"
               onClick={() => pathname === '/sign-up' ? router.push('/sign-in') : router.push('/sign-up')}
               variant="link"
             >
-              {pathname === '/sign-up' ? "Sign In" : "Sign Up"}
+            {pathname === '/sign-up' ? "Sign In" : "Sign Up"}
             </Button>
           </div>
           {pathname !== '/sign-up' && (
