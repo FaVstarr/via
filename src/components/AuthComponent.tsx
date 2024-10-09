@@ -77,7 +77,7 @@ export default function AuthPage({type}: {type: string}) {
               <CustomInput control={form.control} name="confirmPassword" label="Confirm Password" placeholder="Confirm your password" type="password" />
             </div>
           )}
-          <Button className="w-full" type="submit" disabled={isLoading}>
+          <Button className="w-full my-4" type="submit" disabled={isLoading}>
 
             {
                   isLoading? (
@@ -96,7 +96,7 @@ export default function AuthPage({type}: {type: string}) {
               <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
             </div>
           </div>
-          <Button className="w-full" variant="outline">
+          <Button className="w-full mt-4" variant="outline">
             <svg
               className="mr-2 h-4 w-4"
               fill="currentColor"
