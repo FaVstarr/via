@@ -5,16 +5,43 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { MapPin } from "lucide-react"
+import { Loader2, MapPin } from "lucide-react"
 import Link from "next/link"
+import { z } from "zod"
 import { useRouter } from "next/navigation"
+import {
+  Form
+} from "@/components/ui/form"
+import { authformSchema } from "@/lib/utils"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useState } from "react"
+import CustomInput from "./CustomInput"
 
-interface AuthComponentProps{
-    pathname : string,
-    
-}
 
-export default function AuthPage({pathname}: AuthComponentProps) {
+
+export default function AuthPage({type}: {type: string}) {
+  const [isLoading, setIsLoading] = useState(false) 
+
+  const formSchema = authformSchema(type)
+
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      confirmPassword: ""
+    },
+  });
+
+ 
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true)
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values)
+  }
   
    const router = useRouter() 
   
@@ -28,31 +55,38 @@ export default function AuthPage({pathname}: AuthComponentProps) {
             <span className="ml-2 text-2xl font-bold">VIA</span>
           </div>
           <CardTitle className="text-2xl text-center">
-            {pathname === '/sign-up' ? "Create an account" : "Sign in to your account"}
+            {type === 'sign-up' ? "Create an account" : "Sign in to your account"}
           </CardTitle>
           <CardDescription className="text-center">
-            {pathname === '/sign-up'
+            {type === 'sign-up'
               ? "Enter your email below to create your account"
               : "Enter your email below to sign in to your account"}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" placeholder="m@example.com" required type="email" />
+            <CustomInput control={form.control} name="email" label="Email" placeholder="Enter your email" type="text" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <Input id="password" required type="password" />
+            <CustomInput control={form.control} name="password" label="Password" placeholder="Enter your password" type="password" />
           </div>
-          {pathname === '/sign-up' && (
+          {type === 'sign-up' && (
             <div className="space-y-2">
-              <Label htmlFor="confirm-password">Confirm Password</Label>
               <Input id="confirm-password" required type="password" />
             </div>
           )}
-          <Button className="w-full" type="submit">
-            {pathname === '/sign-up' ? "Sign Up" : "Sign In"}
+          <Button className="w-full" type="submit" disabled={isLoading}>
+
+            {
+                  isLoading? (
+                    <>
+                    <Loader2 size={20} className="animate-spin" /> &nbsp;Loading...
+                    </>
+                  ) : type === 'sign-in'? 'Sign In' : 'Sign Up'
+                  
+                }
           </Button>
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
@@ -73,19 +107,21 @@ export default function AuthPage({pathname}: AuthComponentProps) {
             </svg>
             Sign in with Google
           </Button>
+          </form>
+          </Form>
         </CardContent>
         <CardFooter className="flex flex-wrap items-center justify-between gap-2">
           <div className="text-sm text-muted-foreground">
-            <span className="mr-1">{pathname === '/sign-up' ? "Already have an account?" : "Don't have an account?"}</span>
+            <span className="mr-1">{type === '/sign-up' ? "Already have an account?" : "Don't have an account?"}</span>
             <Button
               className="hover:underline  text-primary"
-              onClick={() => pathname === '/sign-up' ? router.push('/sign-in') : router.push('/sign-up')}
+              onClick={() => type === '/sign-up' ? router.push('/sign-in') : router.push('/sign-up')}
               variant="link"
             >
-            {pathname === '/sign-up' ? "Sign In" : "Sign Up"}
+            {type === '/sign-up' ? "Sign In" : "Sign Up"}
             </Button>
           </div>
-          {pathname !== '/sign-up' && (
+          {type !== '/sign-up' && (
             <Link className="text-sm underline text-primary" href="/forgot-password">
               Forgot password?
             </Link>

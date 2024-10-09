@@ -1,46 +1,46 @@
 import React from 'react'
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import {
-  Form,
-  FormControl,
+import { FormControl, FormField, FormLabel, FormMessage } from './form'
+import { Input } from './input'
+import { Control, FieldPath} from 'react-hook-form'
+import { z } from 'zod';
+import { authformSchema } from '@/lib/utils';
+
+const formSchema = authformSchema('sign-up')
+
+interface CustomInputProps {
+    
+    name: FieldPath<z.infer<typeof formSchema>>
+    label: string;
+    placeholder: string;
+    control: Control<z.infer<typeof formSchema>>
+    type: 'text' | 'password' ;
   
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { useMemo } from "react"
+}
 
 
-
-
-
-const baseSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-  password: z
-    .string()
-    .min(6, { message: "Password must be at least 6 characters" })
-    .max(16, { message: "Password must be at most 16 characters" }),
-});
-
-// Extend the schema for sign-up
-const signUpSchema = baseSchema.extend({
-  confirmPassword: z.string(),
-}).superRefine(({ confirmPassword, password }, ctx) => {
-  if (confirmPassword !== password) {
-    ctx.addIssue({
-      code: "custom",
-      message: "Passwords do not match",
-      path: ["confirmPassword"],
-    });
-  }
-});
-
-const CustomInput = () => {
+const CustomInput = ({control ,name, label , placeholder, type} : CustomInputProps) => {
   return (
-    <div>CustomInput</div>
+    <FormField
+                control={control}
+                name={name}
+                render={({ field }) => (
+                  <div className="form-item">
+                    <FormLabel className="form-label">{label}</FormLabel>
+
+                    <div className="flex w-full flex-col">
+                      <FormControl>
+                        <Input
+                          placeholder={placeholder}
+                          type={type}
+                          className="input-class"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="form-message mt-2"></FormMessage>
+                    </div>
+                  </div>
+                )}
+              />
   )
 }
 
