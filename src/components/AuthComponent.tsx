@@ -112,16 +112,16 @@ export default function AuthPage({type}: {type: string}) {
         </CardContent>
         <CardFooter className="flex flex-wrap items-center justify-between gap-2">
           <div className="text-sm text-muted-foreground">
-            <span className="mr-1">{type === '/sign-up' ? "Already have an account?" : "Don't have an account?"}</span>
+            <span className="mr-1">{type === 'sign-up' ? "Already have an account?" : "Don't have an account?"}</span>
             <Button
               className="hover:underline  text-primary"
-              onClick={() => type === '/sign-up' ? router.push('/sign-in') : router.push('/sign-up')}
+              onClick={() => type === 'sign-up' ? router.push('/sign-in') : router.push('/sign-up')}
               variant="link"
             >
-            {type === '/sign-up' ? "Sign In" : "Sign Up"}
+            {type === 'sign-up' ? "Sign In" : "Sign Up"}
             </Button>
           </div>
-          {type !== '/sign-up' && (
+          {type !== 'sign-up' && (
             <Link className="text-sm underline text-primary" href="/forgot-password">
               Forgot password?
             </Link>
