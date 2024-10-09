@@ -74,7 +74,7 @@ export default function AuthPage({type}: {type: string}) {
           </div>
           {type === 'sign-up' && (
             <div className="space-y-2">
-              <Input id="confirm-password" required type="password" />
+              <CustomInput control={form.control} name="confirmPassword" label="Confirm Password" placeholder="Confirm your password" type="password" />
             </div>
           )}
           <Button className="w-full" type="submit" disabled={isLoading}>
