@@ -3,8 +3,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+
 import { Loader2, MapPin } from "lucide-react"
 import Link from "next/link"
 import { z } from "zod"
@@ -23,6 +22,8 @@ import CustomInput from "./CustomInput"
 export default function AuthPage({type}: {type: string}) {
   const [isLoading, setIsLoading] = useState(false) 
 
+  
+
   const formSchema = authformSchema(type)
 
   // 1. Define your form.
@@ -37,10 +38,15 @@ export default function AuthPage({type}: {type: string}) {
 
  
   function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true)
+    try{
+      setIsLoading(true)
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values)
+    }catch(error){
+      setIsLoading(false)
+      console.log(error)
+    }
   }
   
    const router = useRouter() 
