@@ -11,19 +11,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { MapPin, Search, Navigation, Users, BookOpen, Globe, Menu, Play, FileText, Award } from "lucide-react"
 import Link from "next/link"
 
+
 export default function LearnPage() {
-  const [selectedLanguage, setSelectedLanguage] = useState("English")
+  // const [selectedLanguage, setSelectedLanguage] = useState("English")
   const [searchQuery, setSearchQuery] = useState("")
 
-  const handleLanguageChange = (lang: string) => setSelectedLanguage(lang)
+  // const handleLanguageChange = (lang: string) => setSelectedLanguage(lang)
 
   const handleSearch = () => {
     console.log("Searching for:", searchQuery)
@@ -57,43 +58,7 @@ export default function LearnPage() {
       {/* Main content */}
       <main className="flex-1">
         {/* Top bar */}
-        <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" size="icon" className="md:hidden">
-              <Menu className="h-4 w-4" />
-            </Button>
-            <h1 className="text-2xl font-bold">Learn</h1>
-          </div>
-          <div className="flex items-center space-x-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline">{selectedLanguage}</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => handleLanguageChange("English")}>English</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleLanguageChange("Indigenous Language")}>
-                  Indigenous Language
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleLanguageChange("Spanish")}>Spanish</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Avatar>
-                  <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Log out</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </div>
+       
 
         {/* Search bar */}
         <div className="mb-6">

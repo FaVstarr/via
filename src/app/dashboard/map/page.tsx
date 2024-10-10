@@ -7,25 +7,21 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 import { Menu, Plus, Layers, ZoomIn, ZoomOut } from "lucide-react"
+import DashboardSearchNav from "@/components/DashboardSearchNav"
 
 
 export default function MapPage() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("All")
-  const [selectedLanguage, setSelectedLanguage] = useState("English")
 
-  const handleSearch = () => {
-    console.log("Searching for:", searchQuery)
-    // Implement actual search logic here
-  }
+  const [selectedCategory, setSelectedCategory] = useState("All")
+ 
+
+
 
   const handleAddLandmark = () => {
     console.log("Opening add landmark form")
@@ -38,7 +34,7 @@ export default function MapPage() {
     // Implement logic to filter map based on category
   }
 
-  const handleLanguageChange = (lang: string) => setSelectedLanguage(lang)
+  
 
   return (
     <div className=" h-screen bg-gray-100 dark:bg-gray-900">
@@ -48,50 +44,7 @@ export default function MapPage() {
       {/* Main content */}
       <main className="flex-1  overflow-hidden">
         {/* Top bar */}
-        <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" size="icon" className="md:hidden">
-              <Menu className="h-4 w-4" />
-            </Button>
-            <Input
-              type="search"
-              placeholder="Search landmarks or routes..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-64 md:w-96"
-            />
-            <Button onClick={handleSearch}>Search</Button>
-          </div>
-          <div className="flex items-center space-x-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline">{selectedLanguage}</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => handleLanguageChange("English")}>English</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleLanguageChange("Indigenous Language")}>
-                  Indigenous Language
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleLanguageChange("Spanish")}>Spanish</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Avatar>
-                  <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Log out</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </div>
+        <DashboardSearchNav />
 
         {/* Map and controls */}
         <div className="grid gap-4 grid-cols-1 md:grid-cols-4 h-[calc(100vh-120px)]">

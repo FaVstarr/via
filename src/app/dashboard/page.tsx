@@ -15,70 +15,31 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MapPin,  Navigation,  Shield, Menu } from "lucide-react"
 import InteractiveMapComponent from "@/components/InteractiveMapComponent"
+import DashboardSearchNav from "@/components/DashboardSearchNav"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
 export default function Dashboard() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedLanguage, setSelectedLanguage] = useState("English")
 
-  // Placeholder functions - these would be implemented with actual logic in a real app
-  const handleSearch = () => console.log("Searching for:", searchQuery)
-  const handleLanguageChange = (lang: string) => setSelectedLanguage(lang)
+  const {data: session} = useSession()
+  console.log(session)
+  const router = useRouter()
+ 
   const handleAddLandmark = () => console.log("Opening add landmark form")
   const handleAddRoute = () => console.log("Opening add route form")
   const handleModerate = () => console.log("Opening moderation panel")
 
+  
+
   return (
-    <div className="h-screen">
+    <div className="">
       {/* Sidebar */}
      
 
       {/* Main content */}
-      <main className="flex-1 ">
+      <main className="flex-1 h-screen w-full">
         {/* Top bar */}
-        <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" size="icon" className="md:hidden">
-              <Menu className="h-4 w-4" />
-            </Button>
-            <Input
-              type="search"
-              placeholder="Search landmarks or routes..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-64 md:w-96"
-            />
-            <Button onClick={handleSearch}>Search</Button>
-          </div>
-          <div className="flex items-center space-x-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline">{selectedLanguage}</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => handleLanguageChange("English")}>English</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleLanguageChange("Indigenous Language")}>
-                  Indigenous Language
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleLanguageChange("Spanish")}>Spanish</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Log out</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </div>
+        <DashboardSearchNav />
 
         {/* Map and Tabs */}
         <div className="grid gap-4 grid-cols-1 md:grid-cols-3">

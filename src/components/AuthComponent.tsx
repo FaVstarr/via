@@ -16,13 +16,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react"
 import CustomInput from "./CustomInput"
+import { signIn, useSession } from "next-auth/react"
 
 
 
 export default function AuthPage({type}: {type: string}) {
   const [isLoading, setIsLoading] = useState(false) 
+  const router = useRouter()
 
-  
+  const {data: session} = useSession()
 
   const formSchema = authformSchema(type)
 
@@ -49,10 +51,14 @@ export default function AuthPage({type}: {type: string}) {
     }
   }
   
-   const router = useRouter() 
-  
+  if(session){
+    router.push('/dashboard')
+  }else{
+    router.push('/sign-in')
+  }
 
   return (
+    
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
@@ -102,7 +108,7 @@ export default function AuthPage({type}: {type: string}) {
               <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
             </div>
           </div>
-          <Button className="w-full mt-4" variant="outline">
+          <Button className="w-full mt-4" variant="outline" onClick={() => signIn('google')}>
             <svg
               className="mr-2 h-4 w-4"
               fill="currentColor"

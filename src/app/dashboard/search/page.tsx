@@ -17,6 +17,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { MapPin, Search, Navigation, Users, BookOpen, Globe, Menu, Filter } from "lucide-react"
+import DashboardSearchNav from "@/components/DashboardSearchNav"
 // import Link from "next/link"
 
 export default function SearchPage() {
@@ -28,17 +29,17 @@ export default function SearchPage() {
     culturalInfo: true,
   })
 
-  const handleSearch = () => {
-    console.log("Searching for:", searchQuery)
-    console.log("Filters:", selectedFilters)
-    // Implement actual search logic here
-  }
+  // const handleSearch = () => {
+  //   console.log("Searching for:", searchQuery)
+  //   console.log("Filters:", selectedFilters)
+  //   // Implement actual search logic here
+  // }
 
-  const handleLanguageChange = (lang: string) => setSelectedLanguage(lang)
+  // const handleLanguageChange = (lang: string) => setSelectedLanguage(lang)
 
-  const handleFilterChange = (filter: string) => {
-    setSelectedFilters(prev => ({ ...prev, [filter]: !prev[filter] }))
-  }
+  // const handleFilterChange = (filter: string) => {
+  //   setSelectedFilters(prev => ({ ...prev, [filter]: !prev[filter] }))
+  // }
 
   const searchResults = [
     { type: "landmark", title: "Sacred Mountain", description: "A place of spiritual significance for local indigenous peoples." },
@@ -57,51 +58,7 @@ export default function SearchPage() {
       {/* Main content */}
       <main className="flex-1  overflow-auto">
         {/* Top bar */}
-        <div className="flex justify-between items-center mb-4">
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" size="icon" className="md:hidden">
-              <Menu className="h-4 w-4" />
-            </Button>
-            <Input
-              type="search"
-              placeholder="Search landmarks, routes, or cultural info..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-64 md:w-96"
-            />
-            <Button onClick={handleSearch}>Search</Button>
-          </div>
-          <div className="flex items-center space-x-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline">{selectedLanguage}</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => handleLanguageChange("English")}>English</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleLanguageChange("Indigenous Language")}>
-                  Indigenous Language
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleLanguageChange("Spanish")}>Spanish</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Avatar>
-                  <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Log out</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </div>
-
+        <DashboardSearchNav />
         {/* Search filters and results */}
         <div className="grid gap-4 grid-cols-1 md:grid-cols-4">
           <Card className="md:col-span-1">
