@@ -103,6 +103,7 @@ export default function AuthPage({type}: {type: string}) {
                   
                 }
           </Button>
+          </form>
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t" />
@@ -122,7 +123,7 @@ export default function AuthPage({type}: {type: string}) {
             </svg>
             Sign in with Google
           </Button>
-          </form>
+          
           </Form>
         </CardContent>
         <CardFooter className="flex flex-wrap items-center justify-between gap-2">

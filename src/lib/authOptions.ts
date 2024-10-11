@@ -1,5 +1,25 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from 'next-auth/providers/google'
+import { FirebaseAdapter } from "@next-auth/firebase-adapter"
+
+
+import firebase from "firebase/app"
+import "firebase/firestore"
+
+const firestore = (
+    firebase.apps[0] ?? firebase.initializeApp(
+        {
+            apiKey: "AIzaSyBgPTLQbb3Buwh_DViEYsOWsiM14hGQFXs",
+            authDomain: "via-app-17967.firebaseapp.com",
+            projectId: "via-app-17967",
+            storageBucket: "via-app-17967.appspot.com",
+            messagingSenderId: "254942959515",
+            appId: "1:254942959515:web:c36a73b9f735f484ac333e",
+            measurementId: "G-EF567M6189"
+          }
+    )
+  ).firestore()
+
 
 export const authOptions : NextAuthOptions = {
     providers: [
@@ -11,6 +31,7 @@ export const authOptions : NextAuthOptions = {
         })
     ],
     secret: process.env.NEXT_AUTH_SECRET as string,
+    adapter: FirebaseAdapter(firestore),
     // callbacks: {
 
     //     async jwt({ token, account, profile }) {
