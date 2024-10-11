@@ -1,7 +1,7 @@
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
-
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 import SessionWrapper from "@/components/SessionWrapper";
 import SideBarComponent from "@/components/SideBarComponent";
 import { redirect } from "next/navigation";
@@ -14,6 +14,13 @@ export default async function RootLayout({
   }: Readonly<{
     children: React.ReactNode;
   }>) {
+
+    const auth = getAuth();
+onAuthStateChanged(auth, (user: any) => {
+  if (!user) {
+    redirect('/sign-in')
+  } 
+});
 
     const session = await getServerSession(authOptions);
 

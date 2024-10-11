@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react"
 import CustomInput from "./CustomInput"
 import { signIn, useSession } from "next-auth/react"
+import { signInUser, signUpUser } from "@/lib/actions/user.actions"
 
 
 
@@ -39,17 +40,24 @@ export default function AuthPage({type}: {type: string}) {
   });
 
  
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    try{
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
       setIsLoading(true)
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
-    }catch(error){
-      setIsLoading(false)
-      console.log(error)
+      if (type === "sign-up") {
+        await signUpUser(values.email, values.password, values.confirmPassword);
+        router.push("/dashboard");
+      } else {
+        const userData = await signInUser(values.email, values.password);
+        console.log("User data:", userData);
+        router.push("/dashboard");
+      }
+    } catch (error: any) {
+      console.error("Authentication error:", error.message);
+    } finally {
+      setIsLoading(false);
     }
   }
+  
 
   if (session && status === "authenticated" ) router.push("/dashboard");
   

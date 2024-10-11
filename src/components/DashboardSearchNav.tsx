@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
+import { getAuth } from "firebase/auth"
 // import { Menu } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
@@ -15,6 +16,8 @@ const DashboardSearchNav = () => {
     const [selectedLanguage, setSelectedLanguage] = useState("English")
 
     const {data: session} = useSession()
+    const auth = getAuth();
+    const user = auth.currentUser
 
     console.log(session)
   
@@ -54,7 +57,7 @@ const DashboardSearchNav = () => {
               <DropdownMenuTrigger asChild>
                 <Avatar>
                   <AvatarImage src={session?.user?.image ?? "/"} alt="User" className=" h-[40px] w-[40px] rounded-full" />
-                  <AvatarFallback>U</AvatarFallback>
+                  <AvatarFallback>{user.email[0] || session?.user?.name?[0] : "U"}</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent >
@@ -62,7 +65,7 @@ const DashboardSearchNav = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Profile</DropdownMenuItem>
                 <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem onClick={()=> signOut()}>Log out</DropdownMenuItem>
+                <DropdownMenuItem onClick={()=> session? signOut() : auth.signOut()}>Log out</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             </div>
