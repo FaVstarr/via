@@ -2,7 +2,7 @@
 import HeaderComponent from "@/components/HeaderComponent"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { MapPin, Navigation, Users, BookOpen, Globe, Search, PenTool, Shield } from "lucide-react"
+import { MapPin, Navigation, Users, BookOpen, Globe, Shield } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import LandingImage from '../public/landing.png'

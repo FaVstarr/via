@@ -12,11 +12,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { MapPin, Search, Navigation, Users, BookOpen, Globe, Menu, MessageSquare, ThumbsUp, Share2 } from "lucide-react"
-import Link from "next/link"
+import { Menu, MessageSquare, ThumbsUp, Share2 } from "lucide-react"
+
 
 export default function CommunityPage() {
   const [selectedLanguage, setSelectedLanguage] = useState("English")

@@ -3,10 +3,10 @@
 import React, { useState } from 'react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
-import { Menu } from 'lucide-react'
+// import { Menu } from 'lucide-react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import MobileNav from './MobileNav'
 
 const DashboardSearchNav = () => {
@@ -62,7 +62,7 @@ const DashboardSearchNav = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Profile</DropdownMenuItem>
                 <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Log out</DropdownMenuItem>
+                <DropdownMenuItem onClick={()=> signOut()}>Log out</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             </div>

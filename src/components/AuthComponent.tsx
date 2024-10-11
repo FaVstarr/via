@@ -24,7 +24,7 @@ export default function AuthPage({type}: {type: string}) {
   const [isLoading, setIsLoading] = useState(false) 
   const router = useRouter()
 
-  const {data: session} = useSession()
+  const {data: session, status} = useSession()
 
   const formSchema = authformSchema(type)
 
@@ -50,11 +50,14 @@ export default function AuthPage({type}: {type: string}) {
       console.log(error)
     }
   }
+
+  if (session && status === "authenticated" ) router.push("/dashboard");
   
-  if(session){
-    router.push('/dashboard')
-  }else{
-    router.push('/sign-in')
+  
+  
+  // Render a loading state while session status is being resolved
+  if (status === "loading") {
+    return (<div className="min-h-screen flex items-center justify-center"><Loader2 size={60} className="animate-spin" />Loading...</div>);
   }
 
   return (

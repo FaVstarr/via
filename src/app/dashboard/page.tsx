@@ -1,29 +1,22 @@
 'use client'
-import { useState } from "react"
+
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { MapPin,  Navigation,  Shield, Menu } from "lucide-react"
+
+import { MapPin,  Navigation,  Shield } from "lucide-react"
 import InteractiveMapComponent from "@/components/InteractiveMapComponent"
 import DashboardSearchNav from "@/components/DashboardSearchNav"
 import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
+
 
 export default function Dashboard() {
 
   const {data: session} = useSession()
   console.log(session)
-  const router = useRouter()
+ 
  
   const handleAddLandmark = () => console.log("Opening add landmark form")
   const handleAddRoute = () => console.log("Opening add route form")

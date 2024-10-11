@@ -14,8 +14,8 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { MapPin, Search, Navigation, Users, BookOpen, Globe, Menu, ArrowRight, Clock, Footprints } from "lucide-react"
-import Link from "next/link"
+import {  Menu, Clock, Footprints } from "lucide-react"
+
 
 export default function DirectionsPage() {
   const [origin, setOrigin] = useState("")

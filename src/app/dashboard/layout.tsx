@@ -1,17 +1,25 @@
 
-
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
 
 import SessionWrapper from "@/components/SessionWrapper";
 import SideBarComponent from "@/components/SideBarComponent";
+import { redirect } from "next/navigation";
 
 
 
-export default function RootLayout({
+
+export default async function RootLayout({
     children,
   }: Readonly<{
     children: React.ReactNode;
   }>) {
 
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+      redirect('/sign-in');
+    }
    
     return (
       <SessionWrapper>

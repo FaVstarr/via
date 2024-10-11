@@ -10,16 +10,8 @@ export const authOptions : NextAuthOptions = {
             
         })
     ],
-
+    secret: process.env.NEXT_AUTH_SECRET as string,
     // callbacks: {
-    //     async session({session, token}){
-    //         if (token){
-    //             session.user.image = token.picture
-    //             session.user.name = token.name
-    //             session.user.email = token.email
-    //         }
-    //         return session
-    //     },
 
     //     async jwt({ token, account, profile }) {
     //         if (account && profile) {

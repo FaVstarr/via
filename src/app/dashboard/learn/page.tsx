@@ -2,22 +2,15 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-import { ScrollArea } from "@/components/ui/scroll-area"
+
+// import { ScrollArea } from "@/components/ui/scroll-area"
 
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { MapPin, Search, Navigation, Users, BookOpen, Globe, Menu, Play, FileText, Award } from "lucide-react"
-import Link from "next/link"
+import { MapPin,  BookOpen, Globe, Play, FileText, } from "lucide-react"
+
 
 
 export default function LearnPage() {

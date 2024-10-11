@@ -1,33 +1,26 @@
 'use client'
-import { useState } from "react"
+// import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+
 // import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { MapPin, Search, Navigation, Users, BookOpen, Globe, Menu, Filter } from "lucide-react"
+import { MapPin,  Navigation,  BookOpen,  Filter } from "lucide-react"
 import DashboardSearchNav from "@/components/DashboardSearchNav"
 // import Link from "next/link"
 
 export default function SearchPage() {
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedLanguage, setSelectedLanguage] = useState("English")
-  const [selectedFilters, setSelectedFilters] = useState({
-    landmarks: true,
-    routes: true,
-    culturalInfo: true,
-  })
+  // const [searchQuery, setSearchQuery] = useState("")
+  // const [selectedLanguage, setSelectedLanguage] = useState("English")
+  // const [selectedFilters, setSelectedFilters] = useState({
+  //   landmarks: true,
+  //   routes: true,
+  //   culturalInfo: true,
+  // })
 
   // const handleSearch = () => {
   //   console.log("Searching for:", searchQuery)
@@ -73,24 +66,24 @@ export default function SearchPage() {
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="landmarks"
-                    checked={selectedFilters.landmarks}
-                    onCheckedChange={() => handleFilterChange("landmarks")}
+                    // checked={selectedFilters.landmarks}
+                    // onCheckedChange={() => handleFilterChange("landmarks")}
                   />
                   <Label htmlFor="landmarks">Landmarks</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="routes"
-                    checked={selectedFilters.routes}
-                    onCheckedChange={() => handleFilterChange("routes")}
+                    // checked={selectedFilters.routes}
+                    // onCheckedChange={() => handleFilterChange("routes")}
                   />
                   <Label htmlFor="routes">Routes</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="culturalInfo"
-                    checked={selectedFilters.culturalInfo}
-                    onCheckedChange={() => handleFilterChange("culturalInfo")}
+                    // checked={selectedFilters.culturalInfo}
+                    // onCheckedChange={() => handleFilterChange("culturalInfo")}
                   />
                   <Label htmlFor="culturalInfo">Cultural Info</Label>
                 </div>

@@ -1,7 +1,6 @@
 'use client'
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   DropdownMenu,
@@ -12,7 +11,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-import { Menu, Plus, Layers, ZoomIn, ZoomOut } from "lucide-react"
+import {  Plus, Layers, ZoomIn, ZoomOut } from "lucide-react"
 import DashboardSearchNav from "@/components/DashboardSearchNav"
 
 
