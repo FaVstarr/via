@@ -29,7 +29,7 @@ export async function signUpUser(email: string, password: string, confirmPasswor
 }
 
 // Sign in an existing user
-export async function signInUser(email: string, password: string) {
+export async function signInUser(email: string, password: string):  Promise<{ email: string; uid: string }> {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
@@ -37,7 +37,7 @@ export async function signInUser(email: string, password: string) {
     // Retrieve user data from Firestore
     const userDoc = await getDoc(doc(db, "users", user.uid));
     if (userDoc.exists()) {
-      return userDoc.data();
+      return{ ...userDoc.data(), uid: user.uid, email: user.email };
     } else {
       throw new Error("User does not exist in the database");
     }

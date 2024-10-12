@@ -1,4 +1,5 @@
-
+import {app} from '../../../firebase.config'
+console.log("Firebase Auth Instance:", app);
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 import { getAuth, onAuthStateChanged } from "firebase/auth"
@@ -15,16 +16,23 @@ export default async function RootLayout({
     children: React.ReactNode;
   }>) {
 
-    const auth = getAuth();
-onAuthStateChanged(auth, (user: any) => {
-  if (!user) {
-    redirect('/sign-in')
-  } 
-});
+    const loggedIn = getAuth(app);
+    const checkFirebaseAuth = () => {
+      return new Promise((resolve) => {
+        const unsubscribe = onAuthStateChanged(loggedIn, (user) => {
+          unsubscribe(); // Cleanup the listener
+          resolve(user); // Resolve the promise with the user
+        });
+      });
+    };
 
     const session = await getServerSession(authOptions);
+    const firebaseUser = await checkFirebaseAuth();
 
-    if (!session) {
+    console.log("Session:", session); // Log session
+    console.log("Firebase User:", firebaseUser); // Log Firebase user
+
+    if (!session && !firebaseUser){
       redirect('/sign-in');
     }
    

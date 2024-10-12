@@ -8,13 +8,13 @@ export function cn(...inputs: ClassValue[]) {
 
 export const authformSchema = (type: string) => z.object({
   // sign up
-  confirmPassword: type === 'sign-in' ? z.string().optional() : z.string().min(3),
+  confirmPassword: type === 'sign-up' ? z.string().min(8, { message: "Confirm Password must be at least 8 characters long" }) : z.undefined(),
   // both
   email: z.string().email(),
   password: z.string().min(8, { message: "Password must be at least 8 characters long"}),
 }).refine(
       (values) => {
-        return values.password === values.confirmPassword;
+        return type !== 'sign-up' || values.password === values.confirmPassword;
       },
       {
         message: "Passwords must match!",

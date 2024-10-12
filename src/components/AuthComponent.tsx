@@ -35,20 +35,32 @@ export default function AuthPage({type}: {type: string}) {
     defaultValues: {
       email: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: type === 'sign-up' ? "" : undefined
     },
   });
 
  
   async function onSubmit(values: z.infer<typeof formSchema>) {
+
+   await console.log(values)
     try {
       setIsLoading(true)
       if (type === "sign-up") {
         await signUpUser(values.email, values.password, values.confirmPassword);
         router.push("/dashboard");
-      } else {
+      } else if(type === "sign-in") {
         const userData = await signInUser(values.email, values.password);
         console.log("User data:", userData);
+             // Create a NextAuth session after successful sign-in
+      const result = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false, // Prevent redirect immediately
+      });
+
+      if (result?.error) {
+        throw new Error(result.error); // Handle sign-in error
+      }
         router.push("/dashboard");
       }
     } catch (error: any) {
