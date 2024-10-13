@@ -54,7 +54,7 @@ export default function MapPage() {
             </CardHeader>
             <CardContent className="p-0">
               {/* Placeholder for the actual map component */}
-              <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
+              <div className="absolute inset-0 bg-gray-200 h-72 md:h-full flex items-center justify-center">
                 {/* <span className="text-gray-500 text-lg">Interactive Map Component</span> */}
                 <InteractiveMapComponent/>
               </div>
@@ -70,7 +70,7 @@ export default function MapPage() {
               </div> */}
 
               {/* Legend */}
-              <div className="absolute bottom-4 right-4 bg-background p-4 rounded-lg shadow-md">
+              <div className="absolute top-[90px] md:top-[460px] right-4 bg-background p-4 rounded-lg shadow-md">
                 <h3 className="font-semibold mb-2">Legend</h3>
                 <div className="space-y-2">
                   <div className="flex items-center">
@@ -94,8 +94,8 @@ export default function MapPage() {
             <CardHeader>
               <CardTitle>Landmarks and Routes</CardTitle>
             </CardHeader>
-            <CardContent className="p-0">
-              <div className="p-4 space-y-4">
+            <CardContent className="p-3 md:p-0">
+              <div className="p-4 space-y-32 md:space-y-8">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="outline" className="w-full justify-between">
@@ -119,8 +119,8 @@ export default function MapPage() {
                   <TabsTrigger value="routes">Routes</TabsTrigger>
                 </TabsList>
                 <TabsContent value="landmarks">
-                  <ScrollArea className="h-[calc(100vh-400px)]">
-                    <div className="space-y-4 p-4">
+                  <ScrollArea className="h-[calc(100vh-400px)] ">
+                    <div className="space-y-4 p-4 overflow-y-auto">
                       <Card>
                         <CardHeader className="p-4">
                           <CardTitle className="text-sm font-medium">Sacred Mountain</CardTitle>
@@ -151,9 +151,9 @@ export default function MapPage() {
                     </div>
                   </ScrollArea>
                 </TabsContent>
-                <TabsContent value="routes">
-                  <ScrollArea className="h-[calc(100vh-400px)]">
-                    <div className="space-y-4 p-4">
+                <TabsContent value="routes" >
+                  <ScrollArea className="md:h-[calc(100vh-400px)]">
+                    <div className="space-y-4 p-4 overflow-y-auto">
                       <Card>
                         <CardHeader className="p-4">
                           <CardTitle className="text-sm font-medium">Ancestral Trading Path</CardTitle>

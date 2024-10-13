@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {  Menu, Clock, Footprints } from "lucide-react"
+import InteractiveMapComponent from "@/components/InteractiveMapComponent"
 
 
 export default function DirectionsPage() {
@@ -133,7 +134,8 @@ export default function DirectionsPage() {
                 </TabsList>
                 <TabsContent value="map">
                   <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-md flex items-center justify-center">
-                    <span className="text-gray-500 dark:text-gray-400">Interactive Map Component</span>
+                    {/* <span className="text-gray-500 dark:text-gray-400">Interactive Map Component</span> */}
+                    <InteractiveMapComponent/>
                   </div>
                 </TabsContent>
                 <TabsContent value="directions">
