@@ -11,8 +11,9 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
-import {  Plus, Layers, ZoomIn, ZoomOut } from "lucide-react"
+import {  Plus, Layers,} from "lucide-react"
 import DashboardSearchNav from "@/components/DashboardSearchNav"
+import InteractiveMapComponent from "@/components/InteractiveMapComponent"
 
 
 export default function MapPage() {
@@ -54,18 +55,19 @@ export default function MapPage() {
             <CardContent className="p-0">
               {/* Placeholder for the actual map component */}
               <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                <span className="text-gray-500 text-lg">Interactive Map Component</span>
+                {/* <span className="text-gray-500 text-lg">Interactive Map Component</span> */}
+                <InteractiveMapComponent/>
               </div>
 
               {/* Map controls */}
-              <div className="absolute top-4 right-4 flex flex-col space-y-2">
+              {/* <div className="absolute top-4 right-4 flex flex-col space-y-2">
                 <Button size="icon" variant="secondary">
                   <ZoomIn className="h-4 w-4" />
                 </Button>
                 <Button size="icon" variant="secondary">
                   <ZoomOut className="h-4 w-4" />
                 </Button>
-              </div>
+              </div> */}
 
               {/* Legend */}
               <div className="absolute bottom-4 right-4 bg-background p-4 rounded-lg shadow-md">

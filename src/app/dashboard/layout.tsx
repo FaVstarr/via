@@ -1,3 +1,5 @@
+import '../globals.css';
+
 import {app} from '../../../firebase.config'
 console.log("Firebase Auth Instance:", app);
 import { getServerSession } from "next-auth";
