@@ -22,7 +22,8 @@ import { signInUser, signUpUser } from "@/lib/actions/user.actions"
 
 
 export default function AuthPage({type}: {type: string}) {
-  const [isLoading, setIsLoading] = useState(false) 
+  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingGoogle, setIsLoadingGoogle] = useState(false) 
   const router = useRouter()
 
   const {data: session, status} = useSession()
@@ -39,6 +40,15 @@ export default function AuthPage({type}: {type: string}) {
     },
   });
 
+  async function signInGoogle(){
+   try {
+    setIsLoadingGoogle(true)
+    signIn("google");
+   } catch (error) {
+    setIsLoadingGoogle(false)
+    console.log(error)
+   }
+  }
  
   async function onSubmit(values: z.infer<typeof formSchema>) {
 
@@ -77,7 +87,7 @@ export default function AuthPage({type}: {type: string}) {
   
   // Render a loading state while session status is being resolved
   if (status === "loading") {
-    return (<div className="min-h-screen flex items-center justify-center"><Loader2 size={60} className="animate-spin" />Loading...</div>);
+    return (<div className="min-h-screen flex items-center justify-center"><Loader2 size={60} className="animate-spin" /></div>);
   }
 
   return (
@@ -132,7 +142,15 @@ export default function AuthPage({type}: {type: string}) {
               <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
             </div>
           </div>
-          <Button className="w-full mt-4" variant="outline" onClick={() => signIn('google')}>
+          <Button className="w-full mt-4" variant="outline" onClick={signInGoogle} disabled={isLoadingGoogle}>
+            {isLoadingGoogle ? (
+               <>
+               <Loader2 size={20} className="animate-spin" />
+               </>
+            )
+            :
+            (
+              <>
             <svg
               className="mr-2 h-4 w-4"
               fill="currentColor"
@@ -142,6 +160,10 @@ export default function AuthPage({type}: {type: string}) {
               <path d="M20.283 10.356h-8.327v3.451h4.792c-.446 2.193-2.313 3.453-4.792 3.453a5.27 5.27 0 0 1-5.279-5.28 5.27 5.27 0 0 1 5.279-5.279c1.259 0 2.397.447 3.29 1.178l2.6-2.599c-1.584-1.381-3.615-2.233-5.89-2.233a8.908 8.908 0 0 0-8.934 8.934 8.907 8.907 0 0 0 8.934 8.934c4.467 0 8.529-3.249 8.529-8.934 0-.528-.081-1.097-.202-1.625z" />
             </svg>
             Sign in with Google
+            </>
+            )
+            
+          }
           </Button>
           
           </Form>

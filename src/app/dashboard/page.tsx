@@ -1,5 +1,5 @@
 'use client'
-
+import dynamic from 'next/dynamic'
 import { Button } from "@/components/ui/button"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,15 +7,37 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 import { MapPin,  Navigation,  Shield } from "lucide-react"
-import InteractiveMapComponent from "@/components/InteractiveMapComponent"
-import DashboardSearchNav from "@/components/DashboardSearchNav"
+const InteractiveMapComponent = dynamic(()=> import("@/components/InteractiveMapComponent")) 
+const DashboardSearchNav = dynamic(()=> import("@/components/DashboardSearchNav")) 
 import { useSession } from "next-auth/react"
+import { useState } from "react"
+
 
 
 export default function Dashboard() {
 
   const {data: session} = useSession()
   console.log(session)
+  const accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+  
+  const [mapCenter, setMapCenter] = useState<[number, number] | null>(null);
+  
+
+  const handleSearch = async (location: string) => {
+    
+    const response = await fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(location)}.json?access_token=${accessToken}`
+    );
+    const data = await response.json();
+    if (data.features && data.features.length > 0) {
+      const [lng, lat] = data.features[0].center;
+      setMapCenter([lng, lat]); // Update map center with searched location
+    } else {
+      console.error('Location not found');
+    }
+  };
+
+  
  
  
   const handleAddLandmark = () => console.log("Opening add landmark form")
@@ -32,7 +54,7 @@ export default function Dashboard() {
       {/* Main content */}
       <main className="flex-1 h-screen w-full">
         {/* Top bar */}
-        <DashboardSearchNav />
+        <DashboardSearchNav onSearch={handleSearch} accessToken={accessToken ?? ''} />
 
         {/* Map and Tabs */}
         <div className="grid gap-4 grid-cols-1 md:grid-cols-3">
@@ -43,7 +65,7 @@ export default function Dashboard() {
             <CardContent>
               {/* Placeholder for the actual map component */}
               <div className="bg-gray-200 dark:bg-gray-700 h-96  flex items-center justify-center">
-                <InteractiveMapComponent/>
+                <InteractiveMapComponent center={mapCenter}/>
               </div>
             </CardContent>
           </Card>

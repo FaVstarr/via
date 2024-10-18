@@ -1,4 +1,4 @@
-import '../globals.css';
+
 
 import {app} from '../../../firebase.config'
 console.log("Firebase Auth Instance:", app);
@@ -31,8 +31,8 @@ export default async function RootLayout({
     const session = await getServerSession(authOptions);
     const firebaseUser = await checkFirebaseAuth();
 
-    console.log("Session:", session); // Log session
-    console.log("Firebase User:", firebaseUser); // Log Firebase user
+    // console.log("Session:", session); // Log session
+    // console.log("Firebase User:", firebaseUser); // Log Firebase user
 
     if (!session && !firebaseUser){
       redirect('/sign-in');

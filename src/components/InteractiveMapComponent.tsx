@@ -4,7 +4,11 @@ import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox CSS
 
-const InteractiveMapComponent: React.FC = () => {
+interface InteractiveMapComponentProps {
+  center: [number, number] | null;
+}
+
+const InteractiveMapComponent: React.FC<InteractiveMapComponentProps> = ({center}) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
@@ -44,6 +48,8 @@ const InteractiveMapComponent: React.FC = () => {
         zoom: 12, // Initial zoom level
       });
 
+      
+    
       // Add navigation controls (zoom buttons)
       mapRef.current.addControl(new mapboxgl.NavigationControl());
 
@@ -53,8 +59,11 @@ const InteractiveMapComponent: React.FC = () => {
         .setPopup(new mapboxgl.Popup().setHTML('<h3>Your Location</h3>'))
         .addTo(mapRef.current);
 
+        
+
       // Mark the map as initialized
       mapInitialized.current = true;
+
     }
 
     // Clean up on unmount
@@ -62,6 +71,13 @@ const InteractiveMapComponent: React.FC = () => {
       if (mapRef.current) mapRef.current.remove();
     };
   }, [userLocation]);
+
+  useEffect(() => {
+    if (center && mapRef.current) {
+      mapRef.current.flyTo({ center, zoom: 12 });
+    }
+  }, [center])
+  
 
   return (
     <div

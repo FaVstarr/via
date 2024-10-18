@@ -15,8 +15,12 @@ import {  Plus, Layers,} from "lucide-react"
 import DashboardSearchNav from "@/components/DashboardSearchNav"
 import InteractiveMapComponent from "@/components/InteractiveMapComponent"
 
+interface MapPageProps{
+  handleSearch: string,
+  mapCenter: number
+}
 
-export default function MapPage() {
+export default function MapPage({handleSearch, mapCenter}: MapPageProps) {
 
   const [selectedCategory, setSelectedCategory] = useState("All")
  
@@ -44,7 +48,7 @@ export default function MapPage() {
       {/* Main content */}
       <main className="flex-1  overflow-hidden">
         {/* Top bar */}
-        <DashboardSearchNav />
+        <DashboardSearchNav onSearch={handleSearch} />
 
         {/* Map and controls */}
         <div className="grid gap-4 grid-cols-1 md:grid-cols-4 h-[calc(100vh-120px)]">
@@ -56,7 +60,7 @@ export default function MapPage() {
               {/* Placeholder for the actual map component */}
               <div className="absolute inset-0 bg-gray-200 h-72 md:h-full flex items-center justify-center">
                 {/* <span className="text-gray-500 text-lg">Interactive Map Component</span> */}
-                <InteractiveMapComponent/>
+                <InteractiveMapComponent center={mapCenter}/>
               </div>
 
               {/* Map controls */}
