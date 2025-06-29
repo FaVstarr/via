@@ -119,7 +119,7 @@ export default function CommunityPage() {
                   placeholder="What's on your mind?"
                   value={newPost}
                   onChange={(e) => setNewPost(e.target.value)}
-                  className="mb-2"
+                  className="mb-2 resize-none"
                 />
                 <Button onClick={handlePostSubmit} className="w-full">
                   Post

@@ -9,20 +9,6 @@ import { signInUser } from "./actions/user.actions";
 // import firebase from "firebase/app"
 // import "firebase/firestore"
 
-// const firestore = (
-//     firebase.apps[0] ?? firebase.initializeApp(
-//         {
-//             apiKey: "AIzaSyBgPTLQbb3Buwh_DViEYsOWsiM14hGQFXs",
-//             authDomain: "via-app-17967.firebaseapp.com",
-//             projectId: "via-app-17967",
-//             storageBucket: "via-app-17967.appspot.com",
-//             messagingSenderId: "254942959515",
-//             appId: "1:254942959515:web:c36a73b9f735f484ac333e",
-//             measurementId: "G-EF567M6189"
-//           }
-//     )
-//   ).firestore()
-
 interface User {
     id: string; // Firebase UID
     email: string;
