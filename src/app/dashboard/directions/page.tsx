@@ -23,6 +23,7 @@ export default function DirectionsPage() {
   const [destination, setDestination] = useState("")
   const [selectedLanguage, setSelectedLanguage] = useState("English")
   const [activeTab, setActiveTab] = useState("map")
+   const mapCenter: [number, number] = [-74.5, 40]
 
   const handleGetDirections = () => {
     console.log("Getting directions from", origin, "to", destination)
@@ -135,7 +136,7 @@ export default function DirectionsPage() {
                 <TabsContent value="map">
                   <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-md flex items-center justify-center">
                     {/* <span className="text-gray-500 dark:text-gray-400">Interactive Map Component</span> */}
-                    <InteractiveMapComponent/>
+                    <InteractiveMapComponent center={mapCenter}/>
                   </div>
                 </TabsContent>
                 <TabsContent value="directions">

@@ -73,6 +73,7 @@ export default function AuthPage({type}: {type: string}) {
       }
         router.push("/dashboard");
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Authentication error:", error.message);
     } finally {

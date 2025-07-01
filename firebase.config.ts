@@ -1,8 +1,7 @@
-import { getApps } from "firebase/app";
-import { getApp } from "firebase/app";
-import { initializeApp } from "firebase/app";
+
+import { getApps, getApp, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from 'firebase/firestore'; // If using Firestore
+import { getFirestore, Firestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -12,14 +11,13 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
-  }
-  let app;
-  if (!getApps().length) {
-    app = initializeApp(firebaseConfig);
-  } else {
-    app = getApp();
-  }
-const auth = getAuth(app);
-const db = getFirestore(app); 
+};
 
-export { app, auth, db}
+// Initialize Firebase app with proper typing
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+
+// Initialize services with proper typing
+const auth = getAuth(app);
+const db: Firestore = getFirestore(app);
+
+export { app, auth, db };

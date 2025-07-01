@@ -48,7 +48,11 @@ export const authOptions : NextAuthOptions = {
                   return user
                // Return user data for session
               } catch (error) {
-                throw new Error(error.message); // Throw error to handle sign-in failure
+                if (error instanceof Error) {
+                  throw new Error(error.message); // Throw error to handle sign-in failure
+                } else {
+                  throw new Error("An unknown error occurred during sign-in."); // Fallback error message
+                }
               }
             },
           }),

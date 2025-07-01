@@ -15,12 +15,16 @@ import {  Plus, Layers,} from "lucide-react"
 import DashboardSearchNav from "@/components/DashboardSearchNav"
 import InteractiveMapComponent from "@/components/InteractiveMapComponent"
 
-interface MapPageProps{
-  handleSearch: string,
-  mapCenter: number
-}
 
-export default function MapPage({handleSearch, mapCenter}: MapPageProps) {
+
+export default function MapPage() {
+
+  const mapCenter: [number, number] = [-74.5, 40] // Replace with your default center
+  const accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+  const onSearch = (location: string) => {
+    // Implement search logic
+    console.log("Searching for:", location)
+  }
 
   const [selectedCategory, setSelectedCategory] = useState("All")
  
@@ -47,8 +51,7 @@ export default function MapPage({handleSearch, mapCenter}: MapPageProps) {
 
       {/* Main content */}
       <main className="flex-1  overflow-hidden">
-        {/* Top bar */}
-        <DashboardSearchNav onSearch={handleSearch} />
+        <DashboardSearchNav onSearch={onSearch} accessToken={accessToken} />
 
         {/* Map and controls */}
         <div className="grid gap-4 grid-cols-1 md:grid-cols-4 h-[calc(100vh-120px)]">
@@ -60,7 +63,7 @@ export default function MapPage({handleSearch, mapCenter}: MapPageProps) {
               {/* Placeholder for the actual map component */}
               <div className="absolute inset-0 bg-gray-200 h-72 md:h-full flex items-center justify-center">
                 {/* <span className="text-gray-500 text-lg">Interactive Map Component</span> */}
-                <InteractiveMapComponent center={mapCenter}/>
+                <InteractiveMapComponent center={mapCenter} />
               </div>
 
               {/* Map controls */}

@@ -23,6 +23,7 @@ export async function signUpUser(email: string, password: string, confirmPasswor
     });
 
     return user;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw new Error(error.message);
   }
@@ -41,6 +42,7 @@ export async function signInUser(email: string, password: string):  Promise<{ em
     } else {
       throw new Error("User does not exist in the database");
     }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw new Error(error.message);
   }

@@ -51,7 +51,13 @@ export default function SearchPage() {
       {/* Main content */}
       <main className="flex-1  overflow-auto">
         {/* Top bar */}
-        <DashboardSearchNav />
+        <DashboardSearchNav
+          onSearch={(query: string) => {
+            // Implement search logic here or update state
+            console.log("Searching for:", query)
+          }}
+          accessToken=""
+        />
         {/* Search filters and results */}
         <div className="grid gap-4 grid-cols-1 md:grid-cols-4">
           <Card className="md:col-span-1">
