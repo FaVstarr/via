@@ -1,5 +1,6 @@
 'use client'
 import { useState } from "react"
+import dynamic from 'next/dynamic'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
@@ -10,26 +11,53 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Plus, Layers } from "lucide-react"
 
-import {  Plus, Layers,} from "lucide-react"
-import DashboardSearchNav from "@/components/DashboardSearchNav"
-import InteractiveMapComponent from "@/components/InteractiveMapComponent"
+// Dynamically import components that use browser APIs
+const DashboardSearchNav = dynamic(
+  () => import("@/components/DashboardSearchNav"),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="flex justify-between items-center mb-4 h-16 bg-gray-50 animate-pulse rounded">
+        <div className="flex items-center space-x-2">
+          <div className="w-64 h-10 bg-gray-200 rounded"></div>
+          <div className="w-20 h-10 bg-gray-200 rounded"></div>
+        </div>
+        <div className="flex items-center space-x-4">
+          <div className="w-24 h-10 bg-gray-200 rounded"></div>
+          <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+        </div>
+      </div>
+    )
+  }
+)
 
-
+const InteractiveMapComponent = dynamic(
+  () => import("@/components/InteractiveMapComponent"),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="absolute inset-0 bg-gray-200 h-72 md:h-full flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <span className="text-gray-500 text-lg">Loading Interactive Map...</span>
+        </div>
+      </div>
+    )
+  }
+)
 
 export default function MapPage() {
-
   const mapCenter: [number, number] = [-74.5, 40] // Replace with your default center
   const accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
+  
   const onSearch = (location: string) => {
     // Implement search logic
     console.log("Searching for:", location)
   }
 
   const [selectedCategory, setSelectedCategory] = useState("All")
- 
-
-
 
   const handleAddLandmark = () => {
     console.log("Opening add landmark form")
@@ -42,15 +70,10 @@ export default function MapPage() {
     // Implement logic to filter map based on category
   }
 
-  
-
   return (
-    <div className=" h-screen bg-gray-100 dark:bg-gray-900">
-      {/* Sidebar */}
-     
-
+    <div className="h-screen bg-gray-100 dark:bg-gray-900">
       {/* Main content */}
-      <main className="flex-1  overflow-hidden">
+      <main className="flex-1 overflow-hidden">
         <DashboardSearchNav onSearch={onSearch} accessToken={accessToken} />
 
         {/* Map and controls */}
@@ -60,21 +83,10 @@ export default function MapPage() {
               <CardTitle>Interactive Map</CardTitle>
             </CardHeader>
             <CardContent className="p-0">
-              {/* Placeholder for the actual map component */}
+              {/* Map component with loading state */}
               <div className="absolute inset-0 bg-gray-200 h-72 md:h-full flex items-center justify-center">
-                {/* <span className="text-gray-500 text-lg">Interactive Map Component</span> */}
                 <InteractiveMapComponent center={mapCenter} />
               </div>
-
-              {/* Map controls */}
-              {/* <div className="absolute top-4 right-4 flex flex-col space-y-2">
-                <Button size="icon" variant="secondary">
-                  <ZoomIn className="h-4 w-4" />
-                </Button>
-                <Button size="icon" variant="secondary">
-                  <ZoomOut className="h-4 w-4" />
-                </Button>
-              </div> */}
 
               {/* Legend */}
               <div className="absolute top-[90px] md:top-[460px] right-4 bg-background p-4 rounded-lg shadow-md">
@@ -126,7 +138,7 @@ export default function MapPage() {
                   <TabsTrigger value="routes">Routes</TabsTrigger>
                 </TabsList>
                 <TabsContent value="landmarks">
-                  <ScrollArea className="h-[calc(100vh-400px)] ">
+                  <ScrollArea className="h-[calc(100vh-400px)]">
                     <div className="space-y-4 p-4 overflow-y-auto">
                       <Card>
                         <CardHeader className="p-4">
@@ -158,7 +170,7 @@ export default function MapPage() {
                     </div>
                   </ScrollArea>
                 </TabsContent>
-                <TabsContent value="routes" >
+                <TabsContent value="routes">
                   <ScrollArea className="md:h-[calc(100vh-400px)]">
                     <div className="space-y-4 p-4 overflow-y-auto">
                       <Card>
